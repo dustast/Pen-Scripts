@@ -1,6 +1,11 @@
 import scapy.all as scapy
+import argparse
 
-#TODO Add command line argument functionality
+parser = argparse.ArgumentParser()
+parser.add_argument("-r", "-ip", "--range", dest="ip_range", help="Please enter the IP you wish to scan for,"
+                                                                  " or the range of IPs")
+args = parser.parse_args()
+
 
 # Basic scan which is not hidden, will ping every computer.
 def scan(ip):
@@ -22,7 +27,7 @@ def print_all(result):
         print(single["IP"] + "\t\t" + single["MAC"])
 
 
-scan_result = scan("1.11.1.1/24")
+scan_result = scan(args.ip_range)
 print_all(scan_result)
 
 
