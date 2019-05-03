@@ -1,10 +1,10 @@
 import scapy.all as scapy
 import argparse
-import time
+import time, sys
+
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-ip", dest="ip", help="Please enter the IP you wish to scan for,"
-                                           " or the range of IPs")
+parser.add_argument("-ip", dest="ip", help="Please enter the IP you wish to use")
 parser.add_argument("-g", dest="gateway", help="gateway")
 args = parser.parse_args()
 
@@ -39,8 +39,8 @@ try:
         packet_count += 2
         spoof(args.ip, args.gateway)
         spoof(args.gateway, args.ip)
-        print("\r[+] Packets sent: " + str(packet_count), end="")
-        # sys.stdout.flush() not needed in py 3
+        print("\r[+] Packets sent: " + str(packet_count)),
+        sys.stdout.flush()
         time.sleep(2)
 
 except KeyboardInterrupt:
